@@ -1,0 +1,85 @@
+<%- include('../partials/nav') %>
+<%- include('../partials/head')%> 
+<%- include('../partials/topnav') %>
+
+<div class="content">
+<div class="containerforcreate">
+ 
+    <div class="row p-4">
+        <div class="col-md-10">
+            <form action="/products/<%= product._id %>?_method=PUT" method="POST" class= "shadow-lg p-3 mb-5 rounded center">
+                <h1>Update Product</h1>
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="prodid">Product ID</label>
+                    <input type="text" class="form-control" name="prodid" id="prodid" value="<%= product.prodid %> " required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" name="title" id="title" value="<%= product.title %>" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="manufacturer">Manufacturer</label>
+                    <input type="text" class="form-control" name="manufacturer" id="manufacturer" value="<%= product.manufacturer %>" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="qty">Quantity</label>
+                    <input type="number" class="form-control" name="qty" id="qty" value="<%= product.qty %>" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group  col-md-6">
+                    <label for="category">Category</label>
+                    <select name="category" id="category" class="form-control">
+                        <% if (catogories.length> 0) { %> <% catogories.forEach(category => { %>
+                        <option label ="<%= category.title %>" value="<%= category._id  %>"></option>
+                        <% }) %> <% } else { %>
+                            <p>There are no catogories to display...</p>
+                            <% } %>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="prange">Power Range</label>
+                    <input type="text" class="form-control" name="prange" id="prange" value="<%= product.prange %>">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="pdate">Purchase Date</label>
+                    <% date_1 = product.pdate  %>
+                    <% pdate = date_1.toLocaleDateString(date_1) %>  
+                    <input type="text" class="form-control" name="pdate" id="pdate"  value="<%= pdate %>">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="wdate">Warranty Date</label>
+                    <% date_2 = product.wdate  %>
+                    <% wdate = date_2.toLocaleDateString(date_2) %>  
+                    <input type="text" class="form-control" name="wdate" id="wdate" value="<%= wdate %>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="desc">Product Description</label>
+                <input type="text" class="form-control" name="desc" id="desc" rows="3"
+                 value = "<%= product.desc %>" required></input>
+              </div>  
+
+                <div>
+                    <label>Cover</label>
+                    <input type="file" name="cover" class="filepond" value="<%= product.coverImagePath %>">
+                </div>
+
+                <button class="btn btn-outline-success btn-lg" type="submit">Edit Product</button>
+                
+            </form>
+        </div>
+    </div>
+    
+</div>
+    
+</div>
