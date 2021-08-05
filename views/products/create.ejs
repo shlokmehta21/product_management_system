@@ -1,0 +1,86 @@
+<%- include('../partials/nav') %>
+<%- include('../partials/head')  %> 
+<body>
+<%- include('../partials/messages') %>
+<%- include('../partials/topnav') %>
+<div class="content">
+<div class="containerforcreate">
+    <div class="row p-4">
+        <div class="col-md-10">
+            <form action="" method="POST" class= "shadow-lg p-3 mb-5 rounded center">
+                <h1>Create New Product</h1>
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="prodid">Product ID</label>
+                    <input type="text" class="form-control" name="prodid" id="prodid" placeholder="Enter The Product ID" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Enter The Title" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="manufacturer">Manufacturer</label>
+                    <input type="text" class="form-control" name="manufacturer" id="manufacturer" placeholder="Enter The manufacturer Name" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="qty">Quantity</label>
+                    <input type="number" class="form-control" name="qty" id="qty" placeholder="Enter The Quantity" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="category">Category</label>
+                    <select name="category" id="category" class="form-control">
+                        <option label ="Select Category" value=""></option>
+                        <% if (catogories.length> 0) { %> <% catogories.forEach(category => { %>
+                        <option label ="<%= category.title %>" value="<%= category._id  %>"></option>
+                        <% }) %> <% } else { %>
+                            <p>There are no catogories to display...</p>
+                            <% } %>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="prange">Power Range</label>
+                    <input type="text" class="form-control" name="prange" id="prange" placeholder="Enter The Power Range">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="pdate">Purchase Date</label>
+                    <input type="date" class="form-control" name="pdate" id="pdate" placeholder="Enter The Purchase Date" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="wdate">Warranty Date</label>
+                    <input type="date" class="form-control" name="wdate" id="wdate" placeholder="Enter The Warranty Date" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="desc">Product Description</label>
+                <textarea type="text" class="form-control" name="desc" id="desc" rows="3"
+                  placeholder="Product Description" required></textarea>
+              </div>
+                <div>
+                    <label>Cover</label>
+                    <input type="file" name="cover" class="filepond">
+                </div>
+                <div class="form-group" hidden>
+                    <label for="user">user ID</label>
+                    <input type="text" class="form-control" name="user" id="user" value="<%= user._id %> " required />
+                  </div>
+
+                <button class="btn btn-outline-success btn-lg" type="submit">Create Product</button>
+                
+            </form>
+        </div>
+    </div>
+</div>
+    
+</div>
+</body>

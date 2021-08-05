@@ -1,0 +1,41 @@
+<style>
+   #catLinks {
+  color: black;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  padding: 15px 20px;
+  position: relative;
+}
+#catLinks:after {    
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: black;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+#catLinks:hover:after { 
+  width: 100%; 
+  left: 0; 
+}
+</style>
+
+<!-- category -->
+<div class="categoryWidget shadow-lg p-2 mb-5 rounded center">
+    <div class="card">
+      <div class="card-header bg-dark" style="color: white;">Category</div>
+      <% if (catogories.length> 0) { %> <% catogories.forEach(category => { %>
+      <ul class="list-group list-group-flush">
+        <a id = "catLinks" href="/products/dashboard/<%= category._id %>/1" class="list-group-item text-center"><%= category.title %></a>
+        <% }) %> <% } else { %>
+          <p>There are no catogories to display...</p>
+          <% } %>
+      </ul>
+    </div>
+  </div>
+  <!-- category -->

@@ -1,0 +1,42 @@
+<div class="issuedetail">
+  <form action="" method="GET">
+  <div class="border" style="padding : 10px; margin-bottom: 10px; margin-left: 100px">
+    <i class="fa fa-filter" style="font-size:36px"></i>
+   <strong style="font-size: 33px; margin-bottom: 10px;">Filter By:</strong>
+   <div class="form-row">
+    <div class="col">
+      <p>Category:</p>
+      <input class="form-control" style="margin-bottom: 10px;" id="myInput" type="text" placeholder="Search Category">
+    </div>
+    <div class="col">
+      <p>Employee Number:</p>
+      <input class="form-control" style="margin-bottom: 10px;" id="myInput1" type="text" placeholder="Search Employee Number">
+    </div>
+   </div>
+  <div class="form-row">
+    <div class="col">
+      <p>Prodcut ID:</p>
+      <input class="form-control" style="margin-bottom: 10px;" id="myInput1" type="text" placeholder="Search Prodcut ID">
+    </div>
+    <div class="col">
+      <p>Employee Name:</p>
+      <input class="form-control" style="margin-bottom: 10px;" id="myInput1" type="text" placeholder="Search Employee Name">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col">
+      <p>Issued Before:</p>
+      <input class="form-control" style="margin-bottom: 10px;" type="text" name="issueBefore" value="<%= searchOptions.issueBefore %>" placeholder="Issued Before Date">
+    </div>
+    <div class="col">
+      <p>Issued After:</p>
+      <input class="form-control" style="margin-bottom: 10px;" type="text" name="issueAfter" value="<%= searchOptions.issueAfter %>"  placeholder="Issued After Date">
+    </div>
+    <div class="col">
+      <p> name:</p>
+      <input class="form-control" style="margin-bottom: 10px;" type="text" name="ename" value="<%= searchOptions.ename %>"
+    </div>
+  </div> 
+    <button class="btn btn-primary" type="submit">Search</button> 
+  </div>
+</form>

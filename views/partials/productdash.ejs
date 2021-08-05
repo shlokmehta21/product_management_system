@@ -1,0 +1,98 @@
+<div class="dashtable">
+    <div class="panel panel-default">
+      <table id ="mainTable" class="table  table-hover shadow-lg p-3 mb-5 rounded center">
+        <thead class="bg-dark text-center shadow-sm p-3 mb-5 rounded center">
+          <tr class="text-white">
+            <th>Product ID</th>
+            <th>Title</th>
+            <th>Manufacturer</th>
+            <th>Quantity</th>
+            <th>Status</th>
+            <th>Category</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          <% if (product.length> 0) { %> <% product.forEach(product=> { %>
+          <tr>
+            <td><%= product.prodid %></td>
+            <td><%= product.title %></td>
+            <td><%= product.manufacturer %></td>
+            <td><%= product.qty  %> </td>
+            <!-- message according to qty -->
+            <% var status = product.qty %> 
+            <% if(status > 0) { %>
+              <td>In Stock</td>
+              <% } else { %>
+                <td>Out of Stock</td>
+              <% } %>   
+            <!--  -->
+            <% var prodCat =  product.category.title %> 
+            <% if(prodCat) { %>
+              <td><%= prodCat %></td>
+            <% } else { %>
+              <td> -- </td>
+            <% } %>   
+
+            <!-- <td>category</td> -->
+            <td class="d-flex">
+              <a
+                href="/products/<%= product._id%>"
+                class="btn btn-sm btn-outline-info mr-2"
+                >View</a
+              >
+              <% var role = user.role %>
+              <% if(role === 'user') { %>
+  
+              <% }  else { %> 
+                <form
+                id="deletebtn"
+                action="/products/<%= product._id%>?_method=DELETE"
+                method="POST"
+              >
+                <button class="btn btn-sm btn-outline-danger mr-2">
+                  Delete
+                </button>
+              </form>
+                <% } %> 
+            </td>
+          </tr>
+          <% }) %> <% } else { %>
+
+          <p>There are no Products to display...</p>
+
+          <% } %>
+        </tbody>
+      </table>
+      <% if (pages > 0) { %>
+        <nav aria-label="Page navigation example" style="margin-top: -40px;">
+          <ul class="pagination justify-content-end">
+            <% if (current == 1) { %>
+              <li  class="page-item disabled"><a class="page-link">First</a></li>
+          <% } else { %>
+              <li class="page-item"><a class="page-link" href="/products/dashboard/1">First</a></li>
+          <% } %>
+          <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+          <% if (i !== 1) { %>
+              <li class="page-item disabled"><a class="page-link">...</a></li>
+          <% } %>
+          <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+              <% if (i == current) { %>
+                  <li class="page-item active"><a class="page-link"><%= i %></a></li>
+              <% } else { %>
+                  <li class="page-item"><a class="page-link" href="/products/dashboard/<%= i %>"><%= i %></a></li>
+              <% } %>
+              <% if (i == Number(current) + 4 && i < pages) { %>
+                  <li class="page-item disabled"><a class="page-link">...</a></li>
+              <% } %>
+          <% } %>
+          <% if (current == pages) { %>
+              <li class="page-item disabled"><a class="page-link">Last</a></li>
+          <% } else { %>
+              <li class="page-item"><a class="page-link" href="/products/dashboard/<%= pages %>">Last</a></li>
+          <% } %>
+          </ul>
+          <% } %>
+        </nav>
+    </div>
+  </div>

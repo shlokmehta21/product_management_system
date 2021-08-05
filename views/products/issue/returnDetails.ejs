@@ -1,0 +1,141 @@
+<%- include('../../partials/nav') %> <%- include('../../partials/topnav') %> <%-
+include('../../partials/messages') %>
+<link rel="stylesheet" href="/public/css/issue.css" />
+<div class="content">
+  <div class="issuedetail">
+    <h3 style="font-weight: 300;" class="header p-3 text-dark text-center shadow-sm p-3 mb-5 rounded center">Returned Products </h3>
+    <table class="table table-hover shadow-lg p-3 mb-5 rounded center">
+      <thead class="bg-dark text-center shadow-sm p-3 mb-5">
+        <tr class="text-white">
+          <th>Employee Name</th>
+          <th>Email</th>
+          <th>Employee Number</th>
+          <th>Contact Number</th>
+          <th>Product ID</th>
+          <th>Title</th>
+          <th>Manufacturer</th>
+          <th>Category</th>
+          <th>Return Date/Time</th>
+          <th>Return Quantity</th>
+          <th>Reason</th>
+        </tr>
+      </thead>
+      <tbody class="text-center" id="myTable">
+        <% if (issueback.length> 0) { %> <% issueback.forEach(issueback=> { %>
+        <tr>
+          <td><%= issueback.issue.employee.ename %></td>
+          <td><%= issueback.issue.employee.email %></td>
+          <td><%= issueback.issue.employee.enumber %></td>
+          <td><%= issueback.issue.employee.cnumber %></td>
+          <td><%= issueback.issue.product.prodid %></td>
+          <td><%=issueback.issue.product.title %></td>
+          <td><%=issueback.issue.product.manufacturer %></td>
+          <td><%=issueback.issue.product.category.title %></td>
+          <% var date = issueback.returnTime %> <% var formated =
+          date.toLocaleString(date); %>
+          <td><%= formated %></td>
+          <td><%= issueback.qty %></td>
+          <td class ="d-flex justify-content-center">
+            <!-- Button trigger modal -->
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-info mr-2"
+              data-toggle="modal"
+              data-target="#exampleModalCenter<%= issueback.id %>"
+            >
+              Remark
+            </button>
+            <form
+              id="deletebtn"
+              action="/products/issue/<%= issueback._id%>/returnDetails?_method=DELETE"
+              method="POST"
+            >
+              <button
+                class="btn btn-sm btn-outline-warning"
+                style="
+                  padding-left: 10px;
+                  padding-right: 10px;
+                "
+              >
+                Revert
+              </button>
+            </form>
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="exampleModalCenter<%= issueback.id %>"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                      Remarks
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body"><%= issueback.remarks %></div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <% }) %> <% } else { %>
+
+          <p>There are no issue to display...</p>
+
+          <% } %>
+        </tr>
+      </tbody>
+    </table>
+    <a href="/products/issue/filter_return/1" class="btn btn-primary">Apply Filter</a>
+    <% if (pages > 0) { %>
+    <nav aria-label="Page navigation example" style="margin-top: -40px;">
+      <ul class="pagination justify-content-end">
+        <% if (current == 1) { %>
+          <li  class="page-item disabled"><a class="page-link">First</a></li>
+      <% } else { %>
+          <li class="page-item"><a class="page-link" href="/products/issue/returnDetails/1">First</a></li>
+      <% } %>
+      <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+      <% if (i !== 1) { %>
+          <li class="page-item disabled"><a class="page-link">...</a></li>
+      <% } %>
+      <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+          <% if (i == current) { %>
+              <li class="page-item active"><a class="page-link"><%= i %></a></li>
+          <% } else { %>
+              <li class="page-item"><a class="page-link" href="/products/issue/returnDetails/<%= i %>"><%= i %></a></li>
+          <% } %>
+          <% if (i == Number(current) + 4 && i < pages) { %>
+              <li class="page-item disabled"><a class="page-link">...</a></li>
+          <% } %>
+      <% } %>
+      <% if (current == pages) { %>
+          <li class="page-item disabled"><a class="page-link">Last</a></li>
+      <% } else { %>
+          <li class="page-item"><a class="page-link" href="/products/issue/returnDetails/<%= pages %>">Last</a></li>
+      <% } %>
+      </ul>
+      <% } %>
+    </nav>
+  </div>
+</div>
